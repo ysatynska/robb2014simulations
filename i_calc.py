@@ -1,0 +1,38 @@
+from scipy import integrate
+from scipy.integrate import solve_ivp
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+h1 = 1.5 # 
+P = 6 # period
+max_time = 2000
+transient_t = 1000
+time_step = .001
+m0 = [1.2]
+
+a = -3 * math.sqrt(3)/4 # material-specific constant
+b = 3 * math.sqrt(3)/8 # material-specific constant
+
+t_vals = np.arange(0, max_time, time_step)
+# h = h1 * np.cos(2 * np.pi * t_vals / P)
+
+Is = []
+for i in np.arange(5, P, .01):
+    def dm_dt(t, m):
+        return -2 * a * m - 4 * b * m**3 + h1 * np.cos(2 * np.pi * t / i)
+    sol = solve_ivp(dm_dt, (0, max_time), m0, t_eval=t_vals, dense_output=True)
+
+    def fun_to_integrate(t):
+        m = sol.sol(t)[0]
+        return 2 * a + 12 * b * m * m
+    
+    result = integrate.quad(fun_to_integrate, transient_t, transient_t + i)[0]
+    # print (i, result)
+    Is.append([i, result/i])
+
+print(Is)
+plt.plot([x[0] for x in Is], [x[1] for x in Is])
+plt.xlabel("Period P")
+plt.ylabel("Integral I")
+plt.show()
