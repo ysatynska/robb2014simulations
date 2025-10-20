@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, setspace}
+\doublespacing
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{gensymb} 
+\usepackage{graphicx}
+\usepackage{subcaption}
+\newcommand{\quotes}[1]{``#1''}
+
+
+\title{Dynamic Phase Transitions in Mean-Field Ginzburg–Landau Models: Conjugate Fields and Fourier-Mode Scaling}
+\author{Liz Satynska}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Background}
+Melting ice, popping popcorn, and hot iron losing its magnetization are all examples of phase transitions - a physical phenomenon in which the macroscopic state of a system changes due to external conditions. Dynamic phase transitions (DPTs) are a special type of phase transitions which occur when external forces change rapidly, rather than gradually. Unlike equilibrium phase transitions, during which the system has sufficient time to settle into equilibrium, DPTs involve time-dependent external forces, such as an oscillating magnetic field, which prevent the system from fully going through relaxation dynamics.
+
+Dynamic order parameter Q is used to quantify DPTs that occur due to an oscillating magnetic field. Prior to 2014, Q was known as the time-averaged magnetization over one period of the oscillating field. If $Q\approx0$, the average magnetization over period P is zero, and the system follows the oscillating field closely. If $Q\neq0$, the system breaks the symmetry of the oscillating field. Robb et al. showed in 2014 that there are components to the dynamic order parameter beyond the period-averaged magnetization Q~\cite{2014}. Their analysis was performed close to the critical period $P_c$ -- defined such that if the period of oscillations is over $P_c$, the system has a symmetric magnetization response with Q=0. If the period is below $P_c$, the system has an asymmetric magnetization response with Q not equal to 0.
+
+\section{Related Work}
+The goal of this research was
+to extend Robb et al.’s approach to investigate the dynamic order parameter and the conjugate field using the mean-field Ginzburg-Landau (MFGL) model. In the MFGL model, each magnetic spin is assumed to experience a magnetic field equal to the average field of the system neglecting direct spin-spin interactions. This MFGL model has the following Ginzburg-Landau free energy equation:
+\[F(m)=am^2+bm^4-hm,\]
+where a and b are material-specific constants, $m(t)$ is the magnetization, and $h(t)$ is the strength of the applied magnetic field~\cite{2014}. Figure 1 shows what F(m) looks like for varying values of a.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.7]{f(m).png}
+    \caption{Free energy $F(m)$ vs magnetization $m(t)$, for varying $a$ values.}
+    \label{sklabel}
+\end{figure}
+Over time, every closed physical system evolves in such a way that its free energy gradually minimizes. The free energy in our model must be getting smaller with changes in magnetization. This principle allows us to determine how magnetization changes over time:
+\[\frac{\delta m}{\delta t}=-\frac{\delta F}{\delta m}=-2am-4bm^3+h,\]
+where the negative sign serves as a specification that the free energy minimizes as time progresses. Referring to Figure 1, when $a\geq 0$, the behavior of the system is predictable - it will change in such a way that F(m) goes to its single minimum. However, when $a<0$, there are two local minima, and this is the case we will investigate.
+Robb et al. set $a=-\frac{3\sqrt{3}}{4}$ and $b=\frac{3\sqrt{3}}{8}$, which, for $h=0$, yield free energy minima at m=±1~\cite{2014}. Figure 2 uses these parameters to show that as the strength of the applied field $h(t)$ gets closer to -1, the left well of the graph gets larger than the right well, indicating a preference for negative magnetization $m(t)$. The equivalent happens as $h(t)$ approaches +1, which leads to positive magnetization. When $h(t)$ is zero, the system can exist in either state of magnetization. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.7]{fig2.png}
+    \caption{Free energy $F(m)$ vs magnetization $m(t)$, for varying $h$ values with $a<0$.}
+    \label{sklabel}
+\end{figure}
+When the oscillation period P is large enough and $h(t)$ changes slowly, the system will gradually fall from one well to the other back and forth. This is represented in Figure 3a, where the system exhibits a symmetric hysteresis loop . However, if $h(t)$ changes rapidly, the system will not have enough time to transition between the two wells and will get stuck in one state of magnetization exhibiting a nonzero dynamic order parameter. Such behavior of the system is displayed in Figure 3b as two asymmetric hysteresis loops, where the initial $m(0)$ determines which loop the system gets stuck in. This separation in two loops is called bifurcation.
+Both $m(t)$ and $h(t)$ are periodic functions with period $P$ and can be represented as complex Fourier series. Using the formula for components of the series, we can find $m_0$ and $h_0$:
+\[m_0=\frac{1}{P} \int_0^Pm (t) e^{-i0t} dt=\frac{1}{P}\int_0^Pm (t)dt;\]
+\[h_0=\frac{1}{P}\int_0^Ph (t) e^{-i0t} dt=\frac{1}{P}\int_0^Ph (t)dt,\]
+which are the period-averaged magnetization and the period-averaged conjugate field. $m_0$ turns out to be the previously identified dynamic order parameter $Q$. Robb et al.’s 2014 study demonstrated that dynamic order parameter actually consists of multiple Fourier components of $m(t)$ beyond just $m_0$.
+ 
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{Picture2.png}
+    \caption{Symmetric hysteresis loop; $P>>P_c$}
+    \label{fig:left}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{Picture1.png}
+    \caption{Asymmetric hysteresis loops; $P <<P_c$}
+    \label{fig:right}
+  \end{subfigure}
+  \caption{Hysteresis Behavior in Dynamic Systems}
+  \label{fig:side-by-side}
+\end{figure}
+In equilibrium phase transitions, the relationship between magnetization of the system and the applied field strength at the critical temperature $T_c$ is the following: $m\propto h^{\frac{1}{\delta}}$,
+where $\delta=3$ for the MFGL model. In the DPT, an oscillating applied field $h(t)$ causes an either symmetric or asymmetric magnetization response $m(t)$. Research before Robb et al.’s 2014 paper showed that the relationship $m_0\approx(h_0 )^\frac{1}{3}$ holds at the critical period $P=P_c$ for the DPT in the MFGL model. The exponent $\frac{1}{3}$ was the same as the exponent in the equilibrium transition. 
+
+Robb et al.’s 2014 study showed that odd Fourier components of $h(t)$ determine the location of the critical period $P_c$. Above and at $P_c$, the response to odd Fourier components of h(t) consists solely of odd Fourier components of $m(t)$. Below $P_c$, the even components of $m(t)$ take on non-zero values as well, each undergoing a bifurcation. At $P_c$, introducing even Fourier components of $h(t)$ affects both the even and odd Fourier components of $m(t)$. Specifically, through simulations for $j$,$k\leq 30$, Robb et al. discovered that, at critical period $P_c$:
+\[\delta m_{k,e}\propto (\delta h_{j,e} )^\frac{1}{3};\delta m_{k,e}\propto(\delta h_{j,o} )^\frac{1}{3};\delta m_{k,o}\propto (\delta h_{j,e}) ^\frac{1}{3};\delta m_{k,o}\propto(\delta h_{j,o} )^\frac{1}{3},\]
+where $e$ denotes even components, and $o$ - odd. It is a valuable discovery since the same scaling exponent $\frac{1}{3}$ is found for $m$ and $h$ in the equilibrium phase transition at the critical temperature.
+\paragraph{Integrated even-component equation over one period.}
+Robb et al. showed that, by starting from the TDGL equation and projecting onto Fourier modes, the perturbation equations can be grouped—after one-period averaging—into a sum of three contributions that balance the integrated even part of the applied field. For the $k=0$ (even) mode this reads schematically
+\[
+T_1(\delta m)\;+\;T_2(\delta m,\delta m)\;+\;T_3(\delta m,\delta m,\delta m)
+\;=\;\int_0^{P}\!\delta h_e(t)\,dt,
+\]
+where $T_1$ is linear in the even perturbation $\delta m_e$, $T_2$ collects quadratic/cubic mode couplings, and $T_3$ is cubic. At $P=P_c$ the linear part becomes zero, so a small even field is opposed mainly by the cubic terms, giving the cube-root response $\delta m_e \sim h^{1/3}$ (and, by coupling, $|\delta m_{2n+1}| \sim h^{2/3}$). For $P>P_c$ the linear part is small but nonzero, and the identity above then implies a crossover from the $h^{1/3}$ law to a linear law as $h \to 0$; as $P \to P_c^{+}$ this crossover shifts to smaller field amplitudes (see Figure 4).
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.45]{t1t2t3_use.png}
+    \caption{}
+    \label{sklabel}
+\end{figure}
+
+\section{Our Work}
+
+\subsection*{What we set out to do}
+Phase transitions typically have a single order parameter and a single conjugate field, whereas Robb et al.’s 2014 paper implied that the dynamic order parameter is an infinite set of Fourier components of $m(t)$, and that the conjugate field is an infinite set of even Fourier components of h(t). It was interesting to conjecture whether these sets can be combined into an overall effective order parameter $m_{TOT}$ and an overall effective conjugate field $h_{TOT}$. Our plan was to prove or disprove this conjecture using computational simulation, starting with the simplest possible combination of the Fourier components $h_0$ and $h_2$.
+
+\subsection*{What we actually found}
+\subsection{Computationally}
+\begin{enumerate}
+    \item 
+We first verified from Robb et al. 2014 paper the behavior below the critical period using applied fields composed only of odd Fourier components. For a range of such fields and for many Fourier modes ($k\le 30$), we obtained
+\[
+z_k \propto \varepsilon^{1/2}\qquad(P<P_c),
+\]
+\[\text{ where } \epsilon = \frac{P_c-P}{P_c},\]
+while changes in the odd components of the applied field shifted the numerical value of $P_c$ without altering the scaling exponent (see Figure 5). 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.47]{epsilon.png}
+    \caption{}
+    \label{sklabel}
+\end{figure}
+\item
+At $P=P_c$, scaling the even–Fourier field by a small multiplier $h_{\mathrm{mult}}$ yielded
+\[
+z_k \propto h_{\mathrm{mult}}^{1/3},
+\]
+over several orders of magnitude and for many $k$, with or without term $h_0$ (see Figure 6).
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.45]{h_mult_use.png}
+    \caption{}
+    \label{sklabel}
+\end{figure}
+
+\item
+Mode–resolved deviations obey a parity rule (see Figure 7):
+\[
+|\delta m_{2n}| \propto h_{\mathrm{mult}}^{1/3},\qquad |\delta m_{2n+1}| \propto h_{\mathrm{mult}}^{2/3}.
+\]
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.33]{parity_use_2.png}
+    \caption{}
+    \label{sklabel}
+\end{figure}
+
+For $P>P_c$ and sufficiently small $h_{\mathrm{mult}}$, the response crosses from $h_{\mathrm{mult}}^{1/3}$ to a linear law as $h_{\mathrm{mult}}\to 0$; the crossover shifts to smaller $h_{\mathrm{mult}}$ as $P\to P_c^+$. 
+These features align with the behavior shown in Figure 6 of Robb 2014 article displaying three bracketed terms $(T_1, T_2, T_3)$ from equation containing the tree terms derived from EOM at the period $P = 5.3193577$ (see Figure 4)~\cite{2014}.
+
+\end{enumerate}
+\subsection{Analytically}
+
+\paragraph{Fourier–mode equation at $P_c$.}
+Starting from the TDGL equation
+\begin{equation}
+  \frac{d m(t)}{dt} \;=\; -2a\,m(t)\;-\;4b\,m^3(t)\;+\;h(t),
+  \label{eq:tdgl}
+\end{equation}
+write $m(t)=\sum_{-\infty}^\infty m_k e^{ik\omega t}$ and $h(t)=\sum_{-\infty}^\infty h_k e^{ik\omega t}$ with $\omega=2\pi/P$.
+Eq. \eqref{eq:tdgl} for the $k$-th mode gives:
+\begin{equation}
+  ik\omega\, m_k \;=\; -2a\,m_k \;-\; 4b \!\!\sum_{\substack{n_1+n_2+n_3=k}}\! m_{n_1} m_{n_2} m_{n_3} \;+\; h_k .
+  \label{eq:mode_exact}
+\end{equation}
+Let $P=P_c$ and adding $\delta h_k$ perturbation yields $m_k=m_{k,c}+\delta m_k$. Using the perturbed $m_k$ in Eq. (2): 
+\begin{align}
+  0 \;=\;& [-ik\omega\,\delta m_k \;-\; 2a\,\delta m_k
+  \;-\; 12b \!\!\sum_{n_1,n_2} m_{n_1,c} m_{n_2,c}\,\delta m_{k-n_1-n_2}
+  \nonumber]\\
+  &\;-\; [12b \!\!\sum_{n_1,n_2} m_{n_1,c}\,\delta m_{n_2}\,\delta m_{k-n_1-n_2}]
+  \;-\; [4b \!\!\sum_{n_1,n_2} \delta m_{n_1}\,\delta m_{n_2}\,\delta m_{k-n_1-n_2}]
+  \;+\; \delta h_k .
+  \label{eq:mode_perturb}
+\end{align}
+The terms in Figure 7 were derived from Equation (3): $T_1$ is the term in the first pair of square brackets, $T_2$ is in the second pair, and $T_3$ - in the third.
+Equation (3) was our basis for interpreting the exponents $1/3$ for even $k$ and $2/3$ for odd $k$ at $P=P_c$.
+
+\paragraph{Even/odd decomposition and the $P_c$ criterion.}
+Decomposing $m(t)=m_o(t)+m_e(t)$ and $h(t)=h_o(t)+h_e(t)$ into odd/even parts and inserting into \eqref{eq:tdgl} gives the coupled equations
+\begin{equation}
+  \frac{dm_o}{dt} \;=\; -2a\,m_o \;-\; 4b\,m_o^3 \;-\; 12b\,m_o m_e^2 \;+\; h_o,\qquad
+  \frac{dm_e}{dt} \;=\; -2a\,m_e \;-\; 4b\,m_e^3 \;-\; 12b\,m_o^2 m_e \;+\; h_e.
+  \label{eq:odd_even_eom}
+\end{equation}
+For $h_e= 0$, one solution satisfying both EOMs (Eq. (4)) is $m_e=0$. In this case each term in the second EOM is zero,
+so that the second EOM is automatically satisfied. The first EOM becomes 
+\begin{equation}
+  \frac{dm_o}{dt} \;=\; -2a\,m_o \;-\; 4b\,m_o^3  \;+\; h_o,\qquad
+\end{equation}
+The solutions to this first EOM graph as symmetric hysteresis loops (plots of $m_o$ vs $h_o$). For $P >Pc$, the solution is stable
+(with respect to small perturbations). For $P < P_c$, the solution is unstable. By the argument on page 3 of the Robb et al. 2014 paper, a
+perturbation $\delta m_o$ of a symmetric solution $m_o$ gives stability condition
+\begin{equation}
+  \int_0^{P_c} \!\bigl(2a+12b\,m_o^2(t)\bigr)\,dt \;=\; 0.
+  \label{eq:Pc_def_quartic}
+\end{equation}
+This identifies the role of the \emph{odd} part of $h(t)$ in locating $P_c$.
+
+\paragraph{Model variants and their $P_c$ criteria.}
+All the same procedures can be applied to other polynomial free energies: for
+\begin{equation}
+  F(m)=a m^2 + b m^6 - h m \quad\Rightarrow\quad \frac{dm}{dt} = -2a\,m - 6b\,m^5 + h ,
+\end{equation}
+the period–integral condition becomes
+\begin{equation}
+  \int_0^{P_c} \!\bigl(2a + 30b\,m_o^4(t)\bigr)\,dt = 0,
+  \label{eq:Pc_m6}
+\end{equation}
+and the same scalings with $z_k\sim h_{\mathrm{mult}}^{1/3}$ at $P_c$ and $z_k\sim \varepsilon^{1/2}$ below $P_c$ are observed.
+For the mixed form
+\begin{equation}
+  F(m)=a m^4 + b m^6 - h m \quad\Rightarrow\quad \frac{dm}{dt} = -4a\,m^3 - 6b\,m^5 + h ,
+\end{equation}
+the one–period criterion becomes
+\begin{equation}
+  \int_0^{P_c} \!\bigl(12a\,m_o^2(t) + 30b\,m_o^4(t)\bigr)\,dt = 0,
+  \label{eq:Pc_m4m6}
+\end{equation}
+and the same parity and crossover behavior persists.
+
+We have only tested the parity and crossover rules for the two EOMs above, but, for a generic form\begin{equation}
+  F(m)=a m^p + b m^q - h m \quad\Rightarrow\quad \frac{dm}{dt} = [-pa\,m^{p-1} - qb\,m^{q-1}] + h ,
+\end{equation}
+the one–period criterion is
+\begin{equation}
+  \int_0^{P_c} \!\bigl[p(p-1)a\,m^{p-2} - q(q-1)b\,m^{q-2}\bigr]\,dt = 0,
+  \label{eq:Pc_m4m6}
+\end{equation}
+which can be used to locate $P_c$. 
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+\end{document}

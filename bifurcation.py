@@ -21,6 +21,19 @@ def dm_dt(t, m):
     return -2 * a * m - 4 * b * m**3 + h1 * np.cos(2 * np.pi * t / P)
 sol = solve_ivp(dm_dt, (0, max_time), m0, t_eval=t_vals)
 
+plt.figure(figsize=(3.5, 3.5))
+# first trajectory: light purple
+plt.plot(h, sol.y[0], color="#b19cd9", linewidth=1.8, label=fr"$m(t)$, $m_0={m0[0]}$")
+# second trajectory: light blue
+plt.plot(h, sol.y[1], color="#87cefa", linewidth=1.8, label=fr"$m(t)$, $m_0={m0[1]}$")
+
+plt.xlabel(r"$h(t)$", fontsize=22)
+plt.ylabel(r"$m(t)$", fontsize=22)
+plt.title(fr"$m$ vs $h$ for Period $P = 1 = 0.188 P_c$",
+          fontsize=15, fontweight="bold")
+plt.tight_layout()
+plt.show()
+
 fig, axs = plt.subplots(3, 1, figsize=(5, 10))
 # m(t)
 axs[0].plot(sol.t, sol.y[0], color="red")

@@ -26,3 +26,5 @@ plt.xlabel("Xi")
 plt.ylabel("m")
 plt.legend()
 plt.show()
+
+

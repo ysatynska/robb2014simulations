@@ -8,18 +8,26 @@ h1 = 1.5 #
 P = 100 # period
 max_time = 200
 time_step = 1
-m0 = [1.2]
+m0 = [.8]
 
 a = -3 * math.sqrt(3)/4 # material-specific constant
 b = 3 * math.sqrt(3)/8 # material-specific constant
 
-t_vals = np.arange(0, max_time, time_step)
+t_vals = np.arange(1, max_time, time_step)
 h = h1 * np.cos(2 * np.pi * t_vals / P)
 
 def dm_dt(t, m):
     return -2 * a * m - 4 * b * m**3 + 1.5 * np.cos(2 * np.pi * t / P)
 sol = solve_ivp(dm_dt, (0, max_time), m0, t_eval=t_vals)
 
+plt.figure(figsize=(3.5, 3.5))
+plt.plot(h, sol.y[0], color="#b19cd9", linewidth=1.8)  # light purple
+plt.xlabel(r"$h(t)$", fontsize=22)
+plt.ylabel(r"$m(t)$", fontsize=22)
+plt.title(fr"$m$ vs $h$ for Period $P = 100 = 18.8 P_c$",
+          fontsize=15, fontweight="bold")
+plt.tight_layout()
+plt.show()
 fig, axs = plt.subplots(3, 1, figsize=(5, 10))
 # m(t)
 axs[0].plot(sol.t, sol.y[0], label="m(t)")

@@ -42,15 +42,25 @@ offset = 1e-8
 m_avgs_shifted = [x + abs(min(m_avgs)) + offset for x in m_avgs]
 
 fig, axs = plt.subplots(2, 1, figsize=(5, 10))
-# e vs m0
+
+# ε vs ⟨m⟩
 axs[0].plot([x for x in es], [x for x in m_avgs_shifted], color="blue")
-axs[0].set_xlabel("Epsilon")
-axs[0].set_ylabel("Average m")
-axs[0].set_title(f'Transient - {transient_t}; Max Time - {max_time}; Step - {step}')
-# log(e) vs m0
+axs[0].set_xlabel(r"$\varepsilon$")
+axs[0].set_ylabel(r"$\langle m \rangle$")
+axs[0].set_title(
+    rf"Order Parameter vs. Control Parameter "
+    rf"(Transient = {transient_t}, Max Time = {max_time}, Step = {step})",
+    fontsize=12, fontweight="bold"
+)
+
+# log(ε) vs ⟨m⟩
 axs[1].plot([math.log(x) for x in es], [x for x in m_avgs_shifted], color="orange")
-axs[1].set_xlabel("Log (Epsilon)")
-axs[1].set_ylabel("Average m")
+axs[1].set_xlabel(r"$\log(\varepsilon)$")
+axs[1].set_ylabel(r"$\langle m \rangle$")
+axs[1].set_title(
+    r"Log-Scaled Control Parameter vs. Order Parameter",
+    fontsize=12, fontweight="bold"
+)
 
 plt.tight_layout()
 plt.show()
